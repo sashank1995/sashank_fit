@@ -1,7 +1,7 @@
 <% if patient_signed_in? %>
   <table class="table table-bordered">
     <tr>
-      <th> Name of the disease</th>
+      <th> Disease</th>
     </tr>
     <% @diseases.each do |disease| %>
       <tr>
@@ -12,7 +12,7 @@
 <% elsif doctor_signed_in? %>
   <table class="table table-bordered">
     <tr>
-      <th> Name of the disease</th>
+      <th> Disease</th>
     </tr>
     <% @diseases.each do |disease| %>
       <tr>

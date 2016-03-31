@@ -7,13 +7,18 @@ class SymptomsController < ApplicationController
 
   def create
     @disease = Disease.find(params[:disease_id])
-    @symptom = @disease.symptoms.create(symptom_params)
-    if params[:symptom][:name].present?
-
+    if Symptom.where(name: params[:symptom][:name]).present?
+      #Flash message
     else
-      Symptom.inserting(@disease,@symptom)
+      @disease.symptoms.create(symptom_params)
+      #Symptom.inserting(@disease,@symptom)
     end
-    redirect_to show_disease_path(:disease_id)
+    redirect_to show_disease_path(params[:disease_id])
+  end
+
+  def destroy
+    Symptom.find(params[:id]).destroy
+    redirect_to show_disease_path(params[:disease_id])
   end
 
   private

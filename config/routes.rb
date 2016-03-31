@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   patch 'diseases/:disease_id/treatments/:id', to: 'treatments#update', as: :update_treatment
 
   delete 'diseases/:disease_id/treatments/:id', to: 'treatments#destroy', as: :destroy_treatment
+  delete 'diseases/:disease_id/symptoms/:id', to: 'symptoms#destroy', as: :destroy_symptom
 
 
   #resources :diseases do

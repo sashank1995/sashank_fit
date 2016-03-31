@@ -1,3 +1,4 @@
+<h3> You must be suffering from <%= @disease.name %>. We suggest the following for you:</h3>
 <table class="table table-bordered">
   <tr>
     <th> Treatments </th>
@@ -6,13 +7,18 @@
     <tr>
       <td>Medicine: <%=treatment.medicine %><br />
         Food-intake:<%=treatment.food %><br />
-        Activities: <%=treatment.activities %>      | <%= link_to 'edit', edit_treatment_path(treatment.disease, treatment) %> 
+        Activities: <%=treatment.activities %>
+      <% if doctor_signed_in? %>
+        | <%= link_to 'edit', edit_treatment_path(treatment.disease, treatment) %> 
       | <%= link_to "delete", destroy_treatment_path(treatment.disease, treatment) , method: :delete, 
-        data: { confirm: "You sure?" } %></td>
+        data: { confirm: "You sure?" } %>
+    <% end %>
+      </td>
     </tr>
   <% end %>
-</table>
+</table><br /><br /><br />
 
+<h3> Your symptoms might include: </h3>
 <table class= "table table-bordered">
   <tr>
     <th>Symptoms</th>
@@ -20,12 +26,19 @@
   <% @symptom.each do |symp| %>
     <tr>
       <td>
-        <%= symp.name %><br />
+        <%= symp.name %>
+        <% if doctor_signed_in? %>
+        | <%= link_to 'delete', destroy_symptom_path(@disease, symp), method: :delete,
+          data: { confirm: "You sure?"} %>
+      <% end %><br />
       </td>
     </tr>
   <% end %>
 </table><br /><br />
-<%= link_to "Create Treatment", new_treatment_path(:disease_id => @disease.id) %><br />
-<%= link_to "Create Symptom", new_symptom_path(:disease_id => @disease.id) %><br /><br />
+
+<% if doctor_signed_in? %>
+  <%= link_to "Create Treatment", new_treatment_path(:disease_id => @disease.id) %><br />
+  <%= link_to "Create Symptom", new_symptom_path(:disease_id => @disease.id) %><br /><br />
+<% end %>
 
 <%= link_to "Back", root_path %>

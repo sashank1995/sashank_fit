@@ -9,7 +9,8 @@ class DiseasesController < ApplicationController
 
   def show
     @disease = Disease.find(params[:disease_id])
-    @symptom = Symptom.filtering(params[:id])
+    @symptom = @disease.symptoms
+    #@symptom = Symptom.filtering(params[:id])
   end
 
   def create

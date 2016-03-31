@@ -1,12 +1,14 @@
 <% if doctor_signed_in? %>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= form_for @symptom, url: create_symptom_path do |f| %>
+      <%= form_for @symptom, url: create_symptom_path(@disease) do |f| %>
         <%= f.label :name %>
         <%= f.text_field :name %>
 
         <%= f.submit "Create symptom", class: "btn btn-primary" %>
-      <% end %>
+      <% end %><br />
+
+      <%= link_to 'Back', show_disease_path(@disease) %>
     </div>
   </div>
 <% end %>

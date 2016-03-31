@@ -1,24 +1,36 @@
 class SymptomsController < ApplicationController
 
   def new
-    @disease = Disease.find(params[:disease_id])
-    @symptom = @disease.symptoms.build
+    if doctor_signed_in?
+      @disease = Disease.find(params[:disease_id])
+      @symptom = @disease.symptoms.build
+    else 
+      #flash
+    end
   end
 
   def create
-    @disease = Disease.find(params[:disease_id])
-    if Symptom.where(name: params[:symptom][:name]).present?
-      #Flash message
+    if doctor_signed_in?
+      @disease = Disease.find(params[:disease_id])
+      if @disease.symptoms.where(name: params[:symptom][:name]).present?
+        #Flash message
+      else
+        @disease.symptoms.create(symptom_params)
+        #Symptom.inserting(@disease,@symptom)
+      end
+      redirect_to show_disease_path(params[:disease_id])
     else
-      @disease.symptoms.create(symptom_params)
-      #Symptom.inserting(@disease,@symptom)
+      #flash
     end
-    redirect_to show_disease_path(params[:disease_id])
   end
 
   def destroy
-    Symptom.find(params[:id]).destroy
-    redirect_to show_disease_path(params[:disease_id])
+    if doctor_signed_in?
+      Symptom.find(params[:id]).destroy
+      redirect_to show_disease_path(params[:disease_id])
+    else
+      #flash
+    end
   end
 
   private

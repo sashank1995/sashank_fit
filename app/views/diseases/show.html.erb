@@ -1,0 +1,31 @@
+<table class="table table-bordered">
+  <tr>
+    <th> Treatments </th>
+  </tr>
+  <% @disease.disease_treatments.each do |treatment| %>
+    <tr>
+      <td>Medicine: <%=treatment.medicine %><br />
+        Food-intake:<%=treatment.food %><br />
+        Activities: <%=treatment.activities %>      | <%= link_to 'edit', edit_treatment_path(treatment.disease.id, treatment.id) %> 
+        | <%= link_to "delete", destroy_treatment_path , method: :delete, 
+                                          data: { confirm: "You sure?" } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<table class= "table table-bordered">
+  <tr>
+    <th>Symptoms</th>
+  </tr>
+  <% @symptom.each do |symp| %>
+    <tr>
+      <td>
+        <%= symp.name %><br />
+      </td>
+    </tr>
+  <% end %>
+</table><br /><br />
+<%= link_to "Create Treatment", new_treatment_path(:id => @disease.id) %><br />
+  <%= link_to "Create Symptom", new_symptom_path %><br /><br />
+
+  <%= link_to "Back", root_path %>

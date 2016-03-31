@@ -1,0 +1,27 @@
+<% if patient_signed_in? %>
+  <table class="table table-bordered">
+    <tr>
+      <th> Name of the disease</th>
+    </tr>
+    <% @diseases.each do |disease| %>
+      <tr>
+      <td><%= link_to disease.name, show_disease_path(disease) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% elsif doctor_signed_in? %>
+  <table class="table table-bordered">
+    <tr>
+      <th> Name of the disease</th>
+    </tr>
+    <% @diseases.each do |disease| %>
+      <tr>
+      <td><%= link_to disease.name, show_disease_path(disease) %></td>
+      </tr>
+    <% end %>
+  </table><br />
+  <%= link_to 'Create a new Disease', new_disease_path %>
+<% else %>
+  <%= link_to 'I am a Patient', new_patient_session_path %><br />
+  <%= link_to 'I am a doctor', new_doctor_session_path %><br />
+<% end %>

@@ -1,0 +1,19 @@
+<% if doctor_signed_in? %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for @treatment, url: create_treatment_path(:id => params[:id]) do |f| %>
+        <%= f.label :medicine %>
+        <%= f.text_field :medicine %>
+
+        <%= f.label :food %>
+        <%= f.text_field :food %>
+
+        <%= f.label :activities %>
+        <%= f.text_field :activities %>
+
+        <%= f.submit "Create Treatment", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

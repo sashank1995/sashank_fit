@@ -1,0 +1,17 @@
+<% if doctor_signed_in? %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for @disease, url: create_disease_path do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <%= f.submit "Create disease", class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to "Show all diseases", root_path %>
+      <%= link_to "Back", root_path %>
+    </div>
+  </div>
+<% end %>
+
+
+

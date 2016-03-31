@@ -6,9 +6,9 @@
     <tr>
       <td>Medicine: <%=treatment.medicine %><br />
         Food-intake:<%=treatment.food %><br />
-        Activities: <%=treatment.activities %>      | <%= link_to 'edit', edit_treatment_path(treatment.disease.id, treatment.id) %> 
-        | <%= link_to "delete", destroy_treatment_path , method: :delete, 
-                                          data: { confirm: "You sure?" } %></td>
+        Activities: <%=treatment.activities %>      | <%= link_to 'edit', edit_treatment_path(treatment.disease, treatment) %> 
+      | <%= link_to "delete", destroy_treatment_path(treatment.disease, treatment) , method: :delete, 
+        data: { confirm: "You sure?" } %></td>
     </tr>
   <% end %>
 </table>
@@ -25,7 +25,7 @@
     </tr>
   <% end %>
 </table><br /><br />
-<%= link_to "Create Treatment", new_treatment_path(:id => @disease.id) %><br />
-  <%= link_to "Create Symptom", new_symptom_path %><br /><br />
+<%= link_to "Create Treatment", new_treatment_path(:disease_id => @disease.id) %><br />
+<%= link_to "Create Symptom", new_symptom_path(:disease_id => @disease.id) %><br /><br />
 
-  <%= link_to "Back", root_path %>
+<%= link_to "Back", root_path %>

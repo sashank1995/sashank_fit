@@ -6,6 +6,9 @@ class Symptom < ActiveRecord::Base
     Symptom.joins(:diseases).where(diseases:{id: sid}).uniq
   end
 
+  def self.inserting(disease, symptom)
+    ActiveRecord::Base.connection.execute('insert into diseases_symptoms values(symtpom.id, disease.id, symptom.id);')
+  end
 end
 
 

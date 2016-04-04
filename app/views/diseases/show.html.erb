@@ -28,13 +28,33 @@
       <td>
         <%= symp.name %>
         <% if doctor_signed_in? %>
-        | <%= link_to 'delete', destroy_symptom_path(@disease, symp), method: :delete,
-          data: { confirm: "You sure?"} %>
-      <% end %><br />
+          | <%= link_to 'delete', destroy_symptom_path(@disease, symp), method: :delete,
+            data: { confirm: "You sure?"} %>
+        <% end %><br />
       </td>
     </tr>
   <% end %>
 </table><br /><br />
+
+
+<h3>Comments</h3>
+
+  <% @comments.each do |comment| %>
+    <% if patient_signed_in? %>
+      <%= image_tag 'p.jpg', :alt => "Patient", :width => "30px" %>
+      <b><%= current_patient.email %></b>&nbsp; &nbsp; &nbsp;
+    <% elsif doctor_signed_in? %>
+        <%= image_tag 'd.png', :alt => "Doctor", :width => "20px" %>&nbsp;
+      <b><%= current_doctor.email %></b>&nbsp; &nbsp; &nbsp;
+    <% end %>
+    <%= comment.content %><br /><br />
+  <% end %>
+
+
+<%= form_for @comment , url: create_comment_path(@disease) do |f| %>
+  <%= f.text_area :content, rows: 3, cols: 150 %>
+  <%= f.submit "Add comment",  class: "btn btn-primary btn" %>
+<% end %><br /><br /><br />
 
 <% if doctor_signed_in? %>
   <%= link_to "Create Treatment", new_treatment_path(:disease_id => @disease.id) %><br />

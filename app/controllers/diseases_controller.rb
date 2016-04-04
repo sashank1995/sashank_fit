@@ -14,9 +14,20 @@ class DiseasesController < ApplicationController
   end
 
   def create
-    disease = Disease.new(name: params[:disease][:name])
-    disease.save!
-    redirect_to show_disease_path(disease)
+    if Disease.where(name: params[:disease][:name]).present?
+      flash[:danger] = "Disease already exists"
+      redirect_to root_path
+    else
+      disease = Disease.new(disease_params)
+      disease.save
+      redirect_to show_disease_path(disease)
+    end
+  end
+
+  private
+
+  def disease_params
+    params.require(:disease).permit(:name)
   end
 
 end

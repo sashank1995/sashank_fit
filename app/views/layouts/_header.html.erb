@@ -3,7 +3,11 @@
     <%= link_to "FIT", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
+        <% if  doctor_signed_in? %>
+          <p>Doctor Dashboard</p>
+        <% elsif patient_signed_in? %>
+          <p>Patient Dashboard </p>
+        <% end %>
         <% if patient_signed_in? %>
           Logged in as <strong><%= current_patient.email%></strong>
           <%= link_to 'Edit profile', edit_patient_registration_path %> |

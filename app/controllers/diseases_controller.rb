@@ -1,6 +1,11 @@
 class DiseasesController < ApplicationController
   def new
-    @disease =  Disease.new
+    if doctor_signed_in?
+      @disease =  Disease.new
+    else
+      redirect_to root_path
+      flash[:danger] = "You are not authorized to perform this action"
+    end
   end
 
   def index
@@ -23,6 +28,7 @@ class DiseasesController < ApplicationController
       disease = Disease.new(disease_params)
       disease.save
       redirect_to show_disease_path(disease)
+      flash[:success] = "Disease created"
     end
   end
 

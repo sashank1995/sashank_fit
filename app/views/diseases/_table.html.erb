@@ -1,0 +1,8 @@
+<h2> Click on a disease to find its symptoms and treatments:</h2><br />
+  <table class="table table-striped">
+    <% @diseases.each do |disease| %>
+      <tr>
+        <td><p class="color"><%= link_to disease.name, show_disease_path(disease) %></p></td>
+        </tr>
+    <% end %>
+  </table><br />

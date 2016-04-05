@@ -1,29 +1,44 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <%= link_to "FIT", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <% if  doctor_signed_in? %>
-          <p>Doctor Dashboard</p>
-        <% elsif patient_signed_in? %>
-          <p>Patient Dashboard </p>
-        <% end %>
-        <% if patient_signed_in? %>
-          Logged in as <strong><%= current_patient.email%></strong>
-          <%= link_to 'Edit profile', edit_patient_registration_path %> |
-          <%= link_to 'Logout', destroy_patient_session_path, method: :delete %>
-        <% elsif doctor_signed_in? %>
-           Logged in as <strong><%= current_doctor.email%></strong>
-          <%= link_to 'Edit profile', edit_doctor_registration_path %> |
-          <%= link_to 'Logout', destroy_doctor_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'Patient Sign-Up', new_patient_registration_path %> |
-          <%= link_to 'Patient Login', new_patient_session_path %>
-          <%= link_to 'Doctor Sign-Up', new_doctor_registration_path %> |
-          <%= link_to 'Doctor Login', new_doctor_session_path %>
-        <% end %>
-      </ul>
-    </nav>
+    <ul class="nav navbar-nav navbar-right">
+      <% if patient_signed_in? %>
+        <ul class="nav nav-pills">
+          <li><%= link_to 'Edit profile', edit_patient_registration_path %></li>
+          <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+        </ul>
+        <span class="dashboard">Patient Dashboard </span>
+        <div class= "btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">My Profile<span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Interaction Page", "#" %></li>
+            <li><%= link_to "Edit My Profile", edit_patient_registration_path  %></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete  %></li>
+          </ul>
+        </li>
+      <% elsif doctor_signed_in? %>
+        <ul class="nav nav-pills">
+          <li><%= link_to 'Edit profile', edit_patient_registration_path %></li>
+          <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+        </ul>
+        <span class="dashboard">Doctor Dashboard </span>
+        <li class= "dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Profile<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Interaction Page", "#" %></li>
+            <li><%= link_to "Edit My Profile", edit_patient_registration_path  %></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete  %></li>
+          </ul>
+        </li>
+      <% else %>
+        <ul class="nav nav-pills">
+          <li><%= link_to 'Patient Login', new_patient_session_path, class: "login" %></li>
+          <li><%= link_to 'Doctor Login', new_doctor_session_path %></li>
+        </ul>
+      <% end %>
+    </ul>
   </div>
 </header>
 

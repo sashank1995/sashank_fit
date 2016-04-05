@@ -4,6 +4,9 @@ class TreatmentsController < ApplicationController
     if doctor_signed_in?
       @disease = Disease.find(params[:disease_id])
       @treatment = @disease.disease_treatments.build
+    else
+      redirect_to show_disease_path(params[:disease_id])
+      flash[:danger] = "You are not authorized to perform this action"
     end
   end
 
@@ -14,8 +17,10 @@ class TreatmentsController < ApplicationController
 
       if treatment.save!
         redirect_to show_disease_path(@disease)
+        flash[:success] = "Successfully created a treatment"
       else
         render 'new'
+        flash[:danger] = "COuld not create the treatment"
       end
     end
   end
@@ -26,6 +31,9 @@ class TreatmentsController < ApplicationController
       @disease = @treatment.disease
       #@disease = Disease.find_by(:id => params[:id])
       #@treatment = @disease.disease_treatments
+    else
+      redirect_to show_disease_path(params[:disease_id])
+      flash[:danger] = "You are not authorized to perform this action"
     end
   end
 
@@ -35,6 +43,7 @@ class TreatmentsController < ApplicationController
       @treatment = DiseaseTreatment.find(params[:id])
       if @treatment.update_attributes(treatment_params)
         redirect_to show_disease_path(params[:disease_id])
+        flash[:success] = "Successfully updated the treatment"
       else
         render 'edit'
       end
@@ -45,6 +54,11 @@ class TreatmentsController < ApplicationController
     if doctor_signed_in?
       DiseaseTreatment.find(params[:id]).destroy
       redirect_to show_disease_path(params[:disease_id])
+      flash[:success] = "Treatment deleted"
+    else
+      redirect_to show_disease_path(params[:disease_id])
+      flash[:danger] = "You are not authorized to perform this action"
+
     end
   end
 

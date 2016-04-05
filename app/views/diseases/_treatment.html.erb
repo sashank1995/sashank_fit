@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <tr>
+    <th> Treatments </th>
+  </tr>
+  <% @disease.disease_treatments.each do |treatment| %>
+    <tr>
+      <td><p>Medicine: <%=treatment.medicine %><br />
+        Food-intake:<%=treatment.food %><br />
+        Activities: <%=treatment.activities %></p>
+      <% if doctor_signed_in? %>
+         <%= link_to 'edit', edit_treatment_path(treatment.disease, treatment), class: "btn btn-default btn-sm" %> 
+       <%= link_to "delete", destroy_treatment_path(treatment.disease, treatment) , method: :delete, 
+        data: { confirm: "You sure?" }, class: "btn btn-danger" %>
+    <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table><br /><br />
+<% if doctor_signed_in? %>
+  <%= link_to "Create Treatment", new_treatment_path(:disease_id => @disease.id), class: "btn btn-default" %>
+<% end %>
+

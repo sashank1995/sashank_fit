@@ -1,33 +1,37 @@
 <% if doctor_signed_in? %>
   <div class="row">
-    <div class="col-md-3 col-md-offset-3">
+    <div class="col-md-5 col-md-offset-3">
       <%= form_for @treatment, url: create_treatment_path(@disease), html: {class: 'form_horizontal'}  do |f| %>
 
         <div class="form-group">
-          <div class="col-sm-10">
-            <%= f.label :medicine %>
+          <%= f.label :medicine, class: 'col-sm-4 control-label' %>
+          <div class="col-sm-20">
             <%= f.text_field :medicine %>
           </div>
         </div>
 
         <div class="form-group">
-          <div class="col-sm-10">
-            <%= f.label :food %>
+          <%= f.label :food, class: 'col-sm-4 control-label' %>
+          <div class="col-sm-20">
             <%= f.text_field :food %>
           </div>
         </div>
 
         <div class="form-group">
-          <div class="col-sm-10">
-            <%= f.label :activities %>
+          <%= f.label :activities, class: 'col-sm-4 control-label' %>
+          <div class="col-sm-20">
             <%= f.text_field :activities %>
           </div>
         </div>
-        <br />
-        <%= f.submit "Create Treatment", class: "btn btn-primary" %>
+
+        <div class="form-group" >
+           <div class="col-sm-offset-4 col-sm-30">
+             <%= f.submit "Create Treatment", class: "btn btn-primary" %>
+           </div>
+        </div>
       <% end %><br />
 
-      <%= link_to 'back', show_disease_path(@disease) %>
+      <%= link_to 'back', show_disease_path(@disease), class: "btn btn-small btn-success" %>
     </div>
   </div>
 <% end %>

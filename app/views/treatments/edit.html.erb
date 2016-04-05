@@ -1,19 +1,38 @@
 <% if doctor_signed_in? %>
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-5 col-md-offset-3">
       <%= form_for @treatment, url: update_treatment_path(@disease, @treatment), method: :patch  do |f| %>
-        <%= f.label :medicine %>
-        <%= f.text_field :medicine %>
 
-        <%= f.label :food %>
-        <%= f.text_field :food %>
+        <div class="form-group">
+          <%= f.label :medicine, class: "col-sm-4 control-label" %>
+          <div class="col-sm-20">
+            <%= f.text_field :medicine %>
+          </div>
+        </div>
 
-        <%= f.label :activities %>
-        <%= f.text_field :activities %>
+        <div class="form-group">
+          <%= f.label :food, class: "col-sm-4 control-label" %>
+          <div class="col-sm-20">
+            <%= f.text_field :food %>
+          </div>
+        </div>
 
-        <%= f.submit "Save Changes", class: "btn btn-primary" %>
+        <div class="form-grop">
+          <%= f.label :activities, class: "col-sm-4 control-label" %>
+          <div class="col-sm-20">
+            <%= f.text_field :activities %>
+          </div>
+        </div><br />
+
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-40">
+            <%= f.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+          <div>
+          <% end %>
+          </div>
+        </div>
+
+        <%= link_to "Back", show_disease_path(@disease) %>
       <% end %>
-    </div>
-  </div>
-<% end %>
 

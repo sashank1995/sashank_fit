@@ -1,20 +1,31 @@
 class CommentsController < ApplicationController
 
+  def new 
+    @disease = Disease.find(params[:disease_id])
+    @comment = @disease.comments.build 
+  end
+
   def index
-    @commentable = find_commentable
-    @comments = @commentable.comments
+    @disease = Disease.find(params[:id])
+    @comments  = @disease.comments.all
   end
 
   def create
     @disease = Disease.find(params[:id])
     @comment = @disease.comments.create(comment_params)
+    @comment.user_type = current_user.class
+    @comment.user_id = current_user.id
     if @comment.save
       flash[:notice] = "Successfully saved comment."
       redirect_to show_disease_path(@disease)
-    byebug
     else
       render :action => 'new'
     end
+  end
+
+  def show
+    @disease = Disease.find(params[:disease_id])
+    @comment = Comment.find(params[:id])
   end
 
   private
@@ -23,11 +34,4 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content, :user_id, :user_type)
   end
 
-  def find_commentable
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize.find(value)
-      end
-    end
-  end
 end

@@ -23,6 +23,49 @@ textarea {
   margin-bottom: 10px;
 }
 
+p{
+  font-size: 15px;
+}
+
+p.comment{
+  font-size: 14px;
+  margin-left:35px;
+}
+
+span.dashboard{
+  color: green;
+  padding-right:10px;
+}
+
+span.dashboard:hover{
+  color:yellow;
+}
+
+.navbar{
+  max-height:71px;
+}
+
+.navbar-nav > li > a {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/*.nav > li > a{
+  margin-top: 10px;
+}*/
+
+.nav-pills{
+  display:inline-block;
+}
+
+.new{
+  padding:10px 60px;
+}
+
+/*p.color{
+  color:black;
+}*/
+
 /* header */
 
 #logo {
@@ -41,4 +84,7 @@ textarea {
   text-decoration: none;
 }
 
+.btn-danger{
+  padding: 2px;
+}
 

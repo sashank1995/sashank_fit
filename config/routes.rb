@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   devise_for :doctors
 
   root 'diseases#index'
-  #get 'diseases/:id/comments', to: 'comments#index', as: :comments
-
+  get 'diseases/:id/comments', to: 'comments#index', as: :comments
+  
   get 'diseases/new', to: 'diseases#new', as: :new_disease
   get 'diseases/:disease_id/symptoms/new', to: 'symptoms#new', as: :new_symptom
   get 'diseases/:disease_id/treatments/new', to: 'treatments#new', as: :new_treatment
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'diseases/:disease_id', to: 'diseases#show', as: :show_disease
   get 'diseases/:disease_id/treatments/:id', to: 'treatments#show', as: :show_treatment
+  get 'diseases/:disease_id/comments/:id', to: 'comments#show', as: :show_comment
 
   get 'diseases/:disease_id/treatments/:id/edit', to: 'treatments#edit', as: :edit_treatment
 

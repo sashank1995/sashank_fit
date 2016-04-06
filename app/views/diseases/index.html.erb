@@ -3,7 +3,7 @@
 
 <% elsif doctor_signed_in? %>
   <%= render 'table' %>
-  <%= link_to 'Create a new Disease', new_disease_path %>
+  <%= link_to 'Create a new Disease', new_disease_path, class: "btn btn-default" %>
 
 <% else %>
   <%= render 'content' %>

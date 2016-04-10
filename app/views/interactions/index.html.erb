@@ -1,0 +1,16 @@
+<% @interactions.each do |interaction| %>
+  <% if interaction.usable_type == "Patient" %>
+    <%= image_tag 'p.jpg', :alt => "Patient", :width => "30px" %>
+    <b><%= interaction.usable.email %> :</b>&nbsp; &nbsp; &nbsp;
+  <% elsif interaction.usable_type == "Doctor" %>
+    <%= image_tag 'd.png', :alt => "Doctor", :width => "20px" %>&nbsp;
+    <b><%= interaction.usable.email %> :</b>&nbsp; &nbsp; &nbsp;
+  <% end %>
+  <p class="comment"><%= interaction.matter %></p><br /><br />
+<% end %>
+
+
+<%= form_for @interaction , url: create_interaction_path(@disease) do |f| %>
+  <%= f.text_area :matter, rows: 3, cols: 145 %>
+  <%= f.submit "Add comment",  class: "btn btn-primary btn" %>
+<% end %><br />

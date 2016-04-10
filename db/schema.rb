@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404061308) do
+ActiveRecord::Schema.define(version: 20160410110953) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(version: 20160404061308) do
 
   add_index "doctors", ["email"], name: "index_doctors_on_email", unique: true
   add_index "doctors", ["reset_password_token"], name: "index_doctors_on_reset_password_token", unique: true
+
+  create_table "interactions", force: :cascade do |t|
+    t.text     "matter"
+    t.integer  "usable_id"
+    t.string   "usable_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "patients", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

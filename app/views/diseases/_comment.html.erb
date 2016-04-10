@@ -1,10 +1,14 @@
-<% @comments.each do |comment| %>
-  <% if comment.user_type == "Patient" %>
-    <%= image_tag 'p.jpg', :alt => "Patient", :width => "30px" %>
-    <b><%= comment.user.email %> :</b>&nbsp; &nbsp; &nbsp;
-  <% elsif comment.user_type == "Doctor" %>
-    <%= image_tag 'd.png', :alt => "Doctor", :width => "20px" %>&nbsp;
-    <b><%= comment.user.email %> :</b>&nbsp; &nbsp; &nbsp;
+<% if @comments.present? %>
+  <% @comments.each do |comment| %>
+    <% if comment.user_type == "Patient" %>
+      <%= image_tag 'p.jpg', :alt => "Patient", :width => "30px" %>
+      <b><%= comment.user.email %> :</b>&nbsp; &nbsp; &nbsp;
+    <% elsif comment.user_type == "Doctor" %>
+      <%= image_tag 'd.png', :alt => "Doctor", :width => "20px" %>&nbsp;
+      <b><%= comment.user.email %> :</b>&nbsp; &nbsp; &nbsp;
+    <% end %>
+    <p class="comment"><%= comment.content %></p><br /><br />
   <% end %>
-  <p class="comment"><%= comment.content %></p><br /><br />
+<% else %>
+  <p><i> You are first person to comment on this disease. Please type on!! <i></p>
 <% end %>

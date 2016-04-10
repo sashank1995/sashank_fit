@@ -1,3 +1,4 @@
+<% if @symptom.present? %>
 <table class= "table table-hover">
   <tr>
     <th>Symptoms</th>
@@ -9,11 +10,18 @@
         <% if doctor_signed_in? %>
            <%= link_to 'delete', destroy_symptom_path(@disease, symp), method: :delete,
             data: { confirm: "You sure?"}, class: "btn btn-danger" %>
-        <% end %><br />
+        <% end %>
       </td>
     </tr>
   <% end %>
 </table>
+<% else %>
+  <% if doctor_signed_in? %>
+    <p><i> You need to add some symptoms doc!! </i></p>
+  <% else %>
+    <p><i> There are no symptoms currently added to this disease.</i></p><br /><br />
+  <% end %>
+<% end %>
 <% if doctor_signed_in? %>
   <%= link_to "Create Symptom", new_symptom_path(:disease_id => @disease.id), class: "btn btn-default" %><br /><br /><br /><br />
 <% end %>

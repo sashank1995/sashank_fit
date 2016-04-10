@@ -20,7 +20,7 @@ class TreatmentsController < ApplicationController
         flash[:success] = "Successfully created a treatment"
       else
         render 'new'
-        flash[:danger] = "COuld not create the treatment"
+        flash[:danger] = "Could not create the treatment"
       end
     end
   end

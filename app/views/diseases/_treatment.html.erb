@@ -1,3 +1,4 @@
+<% if @disease.disease_treatments.present? %>
 <table class="table table-hover">
   <tr>
     <th> Treatments </th>
@@ -16,6 +17,13 @@
     </tr>
   <% end %>
 </table>
+<% else %>
+  <% if doctor_signed_in? %>
+    <p><i>You need to add some treatments doc!! <i></p>
+  <% else %>
+    <p><i> Sorry! There are no treatments available for this disease yet. THey will soon be added by our doctors.Thank you!! </i></p>
+  <% end %>
+<% end %>
 <% if doctor_signed_in? %>
   <%= link_to "Create Treatment", new_treatment_path(:disease_id => @disease.id), class: "btn btn-default" %><br /><br /><br />
 <% end %>

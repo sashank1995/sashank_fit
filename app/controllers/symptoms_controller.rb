@@ -17,10 +17,10 @@ class SymptomsController < ApplicationController
         flash[:danger] = "Symptom already exists"
       else
         @disease.symptoms.create(symptom_params)
+        flash[:success] = "Symptom created"
         #Symptom.inserting(@disease,@symptom)
       end
       redirect_to show_disease_path(params[:disease_id])
-      flash[:success] = "Symptom created"
     else
       flash[:danger] = "You are not authorized to perform this action"
     end

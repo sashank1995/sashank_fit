@@ -4,9 +4,11 @@
     <ul class="nav navbar-nav navbar-right">
       <% if patient_signed_in? %>
         <span class="dashboard">Patient Dashboard </span>
+        <span class="dashboard"><%=current_patient.email %></span>
         <div class="btn-group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">My Profile<span class="caret"></span></button>
           <ul class="dropdown-menu">
+            <li><%= link_to "Interaction Page", interactions_path %></li>
             <li><%= link_to "Edit My Profile", edit_patient_registration_path  %></li>
             <li class="divider"></li>
             <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete  %></li>
@@ -14,10 +16,11 @@
         </div>
       <% elsif doctor_signed_in? %>
         <span class="dashboard">Doctor Dashboard </span>
+        <span class="dashboard"><%= current_doctor.email %></span>
         <div class= "btn-group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">My Profile<span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><%= link_to "Interaction Page", "#" %></li>
+            <li><%= link_to "Interaction Page", interactions_path %></li>
             <li><%= link_to "Edit My Profile", edit_patient_registration_path  %></li>
             <li class="divider"></li>
             <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete  %></li>

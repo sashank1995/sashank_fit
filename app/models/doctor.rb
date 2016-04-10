@@ -5,4 +5,5 @@ class Doctor < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :comments, :as => :user
+  has_many :interactions, :as => :usable
 end
